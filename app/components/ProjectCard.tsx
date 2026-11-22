@@ -25,7 +25,13 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       </div>
 
       {media.kind === 'image' ? (
-        <div className={styles.imageFrame}>
+        <div
+          className={
+            media.fit === 'contain'
+              ? `${styles.imageFrame} ${styles.contain}`
+              : styles.imageFrame
+          }
+        >
           <Image
             src={media.src}
             alt={media.alt}

@@ -9,6 +9,8 @@
   --border-strong: #3a3a3a;
   --placeholder-border: #4a4a4a;
   --placeholder-bg: #0b0b0b;
+  /* Mat behind figures shown whole; matches their white page background. */
+  --figure-bg: #ffffff;
 
   --font-display: var(--font-vt323);
   --font-mono: var(--font-plex-mono);

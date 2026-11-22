@@ -35,6 +35,18 @@
   object-position: left center;
 }
 
+/* Figures and diagrams: show the whole image on a white mat that matches
+   their own background, instead of cropping. */
+.contain {
+  background: var(--figure-bg);
+}
+
+.contain .image {
+  object-fit: contain;
+  object-position: center;
+  padding: 12px;
+}
+
 .placeholder {
   display: flex;
   flex-direction: column;
