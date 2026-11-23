@@ -1,0 +1,94 @@
+.card {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 12px;
+  width: 180px;
+}
+
+/* Posters, book covers and box art all sit in one 2:3 frame. */
+.cover {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  background: var(--placeholder-bg);
+  transition: border-color 120ms ease;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-style: dashed;
+  border-color: var(--placeholder-border);
+  text-align: center;
+}
+
+.placeholderTitle {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1;
+  color: var(--gray-3);
+}
+
+.title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--fg);
+}
+
+.creator {
+  margin: -6px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--gray-3);
+}
+
+.year {
+  color: var(--gray-4);
+}
+
+/* A card with an href: the title link stretches over the whole card, and the
+   cover lights its border instead of the usual inverted-link hover. */
+.cardLink::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.cardLink:hover {
+  background: none;
+  color: inherit;
+}
+
+.cardLink:focus-visible {
+  outline: none;
+}
+
+.linked:hover .cover {
+  border-color: var(--fg);
+}
+
+.linked:has(.cardLink:focus-visible) {
+  outline: 1px solid var(--fg);
+  outline-offset: 4px;
+}
+
+@media (max-width: 720px) {
+  .card {
+    width: 140px;
+  }
+
+  .placeholderTitle {
+    font-size: 24px;
+  }
+}

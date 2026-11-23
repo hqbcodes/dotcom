@@ -1,0 +1,67 @@
+.now {
+  gap: 56px;
+}
+
+.total {
+  font-size: 15px;
+  color: var(--gray-4);
+}
+
+.shelves {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.shelf {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-strong);
+}
+
+.label {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--gray-3);
+}
+
+.row {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.row > * {
+  scroll-snap-align: start;
+}
+
+@media (max-width: 900px) {
+  .now {
+    gap: 40px;
+  }
+
+  .shelves {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  /* Let a row run to the screen edge so it reads as scrollable. */
+  .row {
+    margin-right: calc(-1 * var(--gutter));
+    padding-right: var(--gutter);
+  }
+}
+
+@media (max-width: 720px) {
+  .row {
+    gap: 16px;
+  }
+}
