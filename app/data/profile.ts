@@ -12,7 +12,7 @@ export const profile = {
 }
 
 export const contactLinks: ContactLink[] = [
-  { label: 'github', text: 'github.com/Pigf00d', href: 'https://github.com/Pigf00d' },
+  { label: 'github', text: 'github.com/hqbcodes', href: 'https://github.com/hqbcodes' },
   { label: 'linkedin', text: 'linkedin.com/in/hqburke', href: 'https://linkedin.com/in/hqburke' },
   { label: 'email', text: 'hqbcodes@gmail.com', href: 'mailto:hqbcodes@gmail.com' },
   // Resume is parked until there's a real URL; uncomment to bring it back.
