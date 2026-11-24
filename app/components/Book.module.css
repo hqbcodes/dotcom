@@ -40,7 +40,13 @@
 }
 
 .stage {
+  /* Set, not measured: Safari sizes a box of vertical text as one column
+     wide, so a title that wraps spilled over the next book. --cols-* come
+     from Book.tsx; the rest is the title's padding and the spine's border. */
+  --spine-w: max(44px, calc(var(--cols-lg) * 26px + 22px));
+
   display: block;
+  width: var(--spine-w);
   height: calc(var(--book-h) * var(--height));
   perspective: 900px;
   pointer-events: none;
@@ -83,10 +89,7 @@
   writing-mode: vertical-rl;
   display: flex;
   align-items: center;
-  min-width: 44px;
-  /* A length, not 100%: Safari sizes the slot before percentage heights
-     resolve, lays the title out in one unwrapped column, and makes the slot
-     only that wide, so the wrapped spine overlapped its neighbours. */
+  width: var(--spine-w);
   height: calc(var(--book-h) * var(--height));
   padding: 10px 0 8px;
   border: 1px solid transparent;
@@ -129,6 +132,20 @@
   letter-spacing: 0.04em;
   text-align: center;
   text-transform: uppercase;
+  /* Book.tsx sets the column breaks, so the browser adds none. */
+  white-space: nowrap;
+}
+
+@media (min-width: 721px) {
+  .breakSm {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .breakLg {
+    display: none;
+  }
 }
 
 .tag {
@@ -225,8 +242,8 @@
     font-size: 22px;
   }
 
-  .spine {
-    min-width: 38px;
+  .stage {
+    --spine-w: max(38px, calc(var(--cols-sm) * 22px + 18px));
   }
 }
 
