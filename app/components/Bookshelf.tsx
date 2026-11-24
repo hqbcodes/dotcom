@@ -12,8 +12,10 @@ export default function Bookshelf() {
       </ul>
       {/* Gives way to the hovered book's caption. */}
       <p className={styles.hint} aria-hidden="true">
-        <span className={styles.hintHover}># hover a spine to pull it out</span>
-        <span className={styles.hintTouch}># tap a spine to pull it out</span>
+        <span className={styles.hintHover}>
+          # hover a spine to pull it out, click it for my notes
+        </span>
+        <span className={styles.hintTouch}># tap a book for my notes</span>
       </p>
     </div>
   )

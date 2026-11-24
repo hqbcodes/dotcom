@@ -13,19 +13,21 @@
   transition-delay: 0s;
 }
 
+/* A button, with the browser's button look reset. */
 .book {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   height: var(--row-h);
+  margin: 0;
   padding: var(--headroom) 0 var(--plank);
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
   outline: none;
   cursor: pointer;
-}
-
-.book:hover {
-  background: none;
-  color: inherit;
 }
 
 .book:focus-visible {
@@ -33,6 +35,7 @@
 }
 
 .stage {
+  display: block;
   height: calc(var(--book-h) * var(--height));
   perspective: 900px;
   pointer-events: none;
@@ -45,6 +48,7 @@
 .body {
   --cover-w: calc(var(--book-h) * var(--height) * var(--ratio));
 
+  display: block;
   position: relative;
   height: 100%;
   transform-style: preserve-3d;

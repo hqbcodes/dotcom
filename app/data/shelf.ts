@@ -18,9 +18,11 @@ export type ShelfItem = {
   /** Author, director or studio. */
   creator: string
   year?: number
-  /** Opens when the book is clicked. */
+  /** Shown as a link under the notes. */
   href?: string
   cover: ShelfCover
+  /** Paragraphs shown beside the cover when the book is clicked. */
+  notes: string[]
   spine?: {
     /** Spine colour. Defaults to 'dark'. */
     tone?: SpineTone
@@ -30,8 +32,9 @@ export type ShelfItem = {
 }
 
 // Books stand on the shelf in this order. To add a cover: save it as
-// public/shelf/<name>.jpg (about 400px wide), import it here, and set the
+// public/shelf/<name>.jpg (400–800px wide), import it here, and set the
 // item's cover to { kind: 'image', src, alt }. The cover keeps its own shape.
+// Notes are one string per paragraph.
 export const shelf: ShelfItem[] = [
   {
     kind: 'reading',
@@ -43,6 +46,7 @@ export const shelf: ShelfItem[] = [
       src: xpExplainedCover,
       alt: 'Extreme Programming Explained, 2nd edition, book cover',
     },
+    notes: ['[NOTES]'],
     spine: { tone: 'light', height: 1 },
   },
   {
@@ -55,6 +59,7 @@ export const shelf: ShelfItem[] = [
       src: howlsMovingCastleCover,
       alt: "Howl's Moving Castle film poster",
     },
+    notes: ['[NOTES]'],
     spine: { tone: 'dark', height: 0.86 },
   },
   {
@@ -63,6 +68,7 @@ export const shelf: ShelfItem[] = [
     creator: 'Atlus',
     year: 2016,
     cover: { kind: 'image', src: persona5Cover, alt: 'Persona 5 box art' },
+    notes: ['[NOTES]'],
     spine: { tone: 'mid', height: 0.78 },
   },
 ]

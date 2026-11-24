@@ -32,7 +32,7 @@ npm lint
 - `app/layout.tsx` - Root layout: fonts (VT323 + IBM Plex Mono via `next/font/google`), metadata, the scanline overlay, and Vercel Analytics
 - `app/page.tsx` - Homepage; composes the section components in order
 - `app/globals.css` - Colour tokens, gutters, and base element styles
-- `app/components/` - One component per section (`Nav`, `Hero`, `Projects` + `ProjectCard`, `BlogList`, `OffHours` + `Bookshelf` + `Book`, `Footer`) plus small shared pieces (`Section`, `SectionHeader`, `Prompt`, `Cursor`, `Scanlines`), each with its own CSS module
+- `app/components/` - One component per section (`Nav`, `Hero`, `Projects` + `ProjectCard`, `BlogList`, `OffHours` + `Bookshelf` + `Book` + `BookNotes`, `Footer`) plus small shared pieces (`Section`, `SectionHeader`, `Prompt`, `Cursor`, `Scanlines`), each with its own CSS module
 - `app/data/` - All editable content as typed arrays (`profile.ts`, `projects.ts`, `posts.ts`, `offHours.ts`, `shelf.ts`)
 
 ### Key Patterns
@@ -54,6 +54,6 @@ npm lint
 - Edit content in `app/data/`, not in the components.
 - A project shows its `media` image through `next/image` when `kind: 'image'`, otherwise the dashed placeholder box. To add a screenshot, put it in `public/`, import it in `projects.ts`, and switch that project's `media` to `kind: 'image'`.
 - The Blog section currently renders a `ComingSoon` box; its real markup is commented out in `BlogList.tsx` (data untouched in `posts.ts`). Uncomment it to bring it back.
-- Outside of Work shows the `Bookshelf`: one spine per item in `shelf.ts` (what I'm reading, watching and playing). Hovering, tapping or tabbing to a spine turns the book in 3D to show its cover, and the status line under the shelf shows its title. Covers live in `public/shelf/` and keep their own aspect ratio; each item's optional `spine` sets its tone (`light` / `mid` / `dark`) and height. The neofetch block is still commented out in `OffHours.tsx` (data in `offHours.ts`).
+- Outside of Work shows the `Bookshelf`: one spine per item in `shelf.ts` (what I'm reading, watching and playing). Hovering or tabbing to a spine turns the book in 3D to show its cover, and the status line under the shelf shows its title. Clicking a book opens `BookNotes` over the dimmed page: cover on the left, the item's `notes` (one string per paragraph; `[NOTES]` until written) on the right. It uses the HTML popover API (`popover` / `popovertarget`), so it stays a Server Component; `popover.d.ts` types those attributes for React 18. Covers live in `public/shelf/` and keep their own aspect ratio; each item's optional `spine` sets its tone (`light` / `mid` / `dark`) and height. The neofetch block is still commented out in `OffHours.tsx` (data in `offHours.ts`).
 - There is no blog backend yet: `posts.ts` holds placeholder rows, and `BlogList` sorts by `date`, newest first.
 - Bracketed text like `[POST TITLE]` or `[RESUME URL]` is an intentional placeholder; leave it until real content exists.
