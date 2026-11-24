@@ -1,8 +1,3 @@
-export type Fact = {
-  label: string
-  value: string
-}
-
 export type ContactLink = {
   label: string
   text: string
@@ -11,21 +6,15 @@ export type ContactLink = {
 
 export const profile = {
   name: 'Henry Burke',
-  host: 'henry@bentonville',
-  lastLogin: 'Last login: Tue Sep 29 09:41:12 on ttys001',
+  host: 'henry@shipping',
   about:
     'Software engineer at Walmart Global Tech, building tools for pharmacy teams across 4,500+ stores.',
 }
 
-export const facts: Fact[] = [
-  { label: 'loc', value: 'Bentonville, AR' },
-  { label: 'edu', value: "William & Mary, CS '25" },
-  { label: 'status', value: 'shipping' },
-]
-
 export const contactLinks: ContactLink[] = [
-  { label: 'github', text: 'github.com/Pigf00d', href: 'https://github.com/Pigf00d' },
+  { label: 'github', text: 'github.com/hqbcodes', href: 'https://github.com/hqbcodes' },
   { label: 'linkedin', text: 'linkedin.com/in/hqburke', href: 'https://linkedin.com/in/hqburke' },
   { label: 'email', text: 'hqbcodes@gmail.com', href: 'mailto:hqbcodes@gmail.com' },
-  { label: 'resume', text: '[RESUME URL]', href: '#contact' },
+  // Resume is parked until there's a real URL; uncomment to bring it back.
+  // { label: 'resume', text: '[RESUME URL]', href: '#contact' },
 ]

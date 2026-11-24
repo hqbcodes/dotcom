@@ -9,6 +9,11 @@
   --border-strong: #3a3a3a;
   --placeholder-border: #4a4a4a;
   --placeholder-bg: #0b0b0b;
+  /* Mat behind figures shown whole; matches their white page background. */
+  --figure-bg: #ffffff;
+  /* Shelf notes: the dimmed page behind, and the see-through panel. */
+  --overlay: rgba(0, 0, 0, 0.72);
+  --panel-bg: rgba(11, 11, 11, 0.86);
 
   --font-display: var(--font-vt323);
   --font-mono: var(--font-plex-mono);

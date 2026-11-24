@@ -3,8 +3,8 @@ import styles from './Nav.module.css'
 
 const links = [
   { href: '#projects', label: 'projects' },
-  { href: '#blog', label: 'blog' },
   { href: '#off-hours', label: 'off-hours' },
+  { href: '#blog', label: 'blog' },
   { href: '#contact', label: 'contact' },
 ]
 

@@ -1,8 +1,8 @@
-// The neofetch block is parked until the section is ready; uncomment these
-// imports and the JSX below to bring it back.
+// The section shows the bookshelf for now. The neofetch block is parked;
+// uncomment these imports and the JSX below to bring it back.
 // import { offHours } from '../data/offHours'
 // import { profile } from '../data/profile'
-import ComingSoon from './ComingSoon'
+import Bookshelf from './Bookshelf'
 import Section from './Section'
 import SectionHeader from './SectionHeader'
 import styles from './OffHours.module.css'
@@ -38,10 +38,11 @@ export default function OffHours() {
     <Section id="off-hours" className={styles.offHours}>
       <SectionHeader
         cwd="~ %"
-        command="neofetch --off-hours"
+        command="ls shelf/"
         title="Outside of Work"
+        subtitle="What I've been reading, watching, and playing."
       />
-      <ComingSoon />
+      <Bookshelf />
       {/*
       <div className={styles.fetch}>
         <pre className={styles.art} aria-hidden="true">

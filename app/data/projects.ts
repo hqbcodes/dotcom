@@ -1,8 +1,15 @@
 import type { StaticImageData } from 'next/image'
 import burntbaseShot from '@/public/burntbase.png'
+import galerasFigure from '@/public/galeras.png'
 
 export type ProjectMedia =
-  | { kind: 'image'; src: StaticImageData; alt: string }
+  | {
+      kind: 'image'
+      src: StaticImageData
+      alt: string
+      /** `cover` (default) crops to fill the frame; `contain` shows the whole image. */
+      fit?: 'cover' | 'contain'
+    }
   | { kind: 'placeholder'; label: string; path?: string; alt: string }
 
 export type Project = {
@@ -37,21 +44,22 @@ export const projects: Project[] = [
       alt: 'BurntBase: instantly scan bases for 3-star attacks',
     },
   },
-  {
-    path: 'urinalbench',
-    type: 'dir',
-    when: '2026 · in progress',
-    title: 'UrinalBench',
-    stat: { value: 'AI vs. humans', caption: 'who picks the right urinal' },
-    description:
-      'An agent benchmark that drops models into bathroom layouts with different urinal counts, sometimes stalls too, and compares their picks against each other and against real people. No reward weighting, just the choice.',
-    tags: ['agents', 'evals', 'benchmarks'],
-    media: {
-      kind: 'placeholder',
-      label: '[ COMING SOON ]',
-      alt: 'UrinalBench screenshot coming soon',
-    },
-  },
+  // UrinalBench is parked for now; uncomment to bring the card back.
+  // {
+  //   path: 'urinalbench',
+  //   type: 'dir',
+  //   when: '2026 · in progress',
+  //   title: 'UrinalBench',
+  //   stat: { value: 'AI vs. humans', caption: 'who picks the right urinal' },
+  //   description:
+  //     'An agent benchmark that drops models into bathroom layouts with different urinal counts, sometimes stalls too, and compares their picks against each other and against real people. No reward weighting, just the choice.',
+  //   tags: ['agents', 'evals', 'benchmarks'],
+  //   media: {
+  //     kind: 'placeholder',
+  //     label: '[ COMING SOON ]',
+  //     alt: 'UrinalBench screenshot coming soon',
+  //   },
+  // },
   // Home Lab is parked for now; uncomment to bring the card back.
   // {
   //   path: 'homelab',
@@ -74,16 +82,17 @@ export const projects: Project[] = [
     type: 'file',
     when: 'research',
     title: 'LLMs for Code',
+    href: 'https://arxiv.org/abs/2308.12415',
     stat: { value: 'ICSME', caption: 'published, SEMERU lab' },
     description:
       'I co-authored a paper on large language models for source code with the SEMERU lab at William & Mary.',
     tags: ['llms', 'software-engineering'],
     link: { label: 'read paper ↗', href: 'https://arxiv.org/abs/2308.12415' },
     media: {
-      kind: 'placeholder',
-      label: '[ FIGURE ]',
-      path: 'img/icsme-paper.png',
-      alt: 'Paper figure placeholder',
+      kind: 'image',
+      src: galerasFigure,
+      alt: 'Galeras pipeline: data collection, pre-processing, data validation, and SE testbed generation',
+      fit: 'contain',
     },
   },
 ]

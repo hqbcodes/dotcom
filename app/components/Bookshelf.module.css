@@ -1,0 +1,81 @@
+.bookshelf {
+  /* Tallest book; others are a share of it. */
+  --book-h: 300px;
+  /* Room above the tallest book for it to lift into. */
+  --headroom: 56px;
+  --plank: 14px;
+  --row-h: calc(var(--headroom) + var(--book-h) + var(--plank));
+  /* Height of the status line under the shelf. */
+  --status-h: 21px;
+
+  position: relative;
+}
+
+/* Books stand centred and wrap onto new shelves; each row of --row-h ends in a
+   plank drawn by the background. A turned cover is centred on its spine, so
+   the side padding leaves room for the end books of a full row to turn. On
+   phones there's no room to spare: covers may swing into the gutter, and the
+   section clips anything past the screen edge (OffHours.module.css). */
+.shelf {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  gap: 0 3px;
+  margin: 0;
+  padding: 0 calc(var(--book-h) * 0.4);
+  list-style: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 calc(var(--row-h) - var(--plank)),
+    var(--gray-4) calc(var(--row-h) - var(--plank))
+      calc(var(--row-h) - var(--plank) + 1px),
+    var(--border-strong) calc(var(--row-h) - var(--plank) + 1px) var(--row-h)
+  );
+}
+
+.hint {
+  height: var(--status-h);
+  margin: 20px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--gray-4);
+}
+
+/* Gives way exactly when a book's caption shows (see Book.module.css). */
+.bookshelf:has(.shelf > li > :focus-visible) .hint {
+  visibility: hidden;
+}
+
+@media (hover: hover) {
+  .bookshelf:has(.shelf > li > :hover) .hint {
+    visibility: hidden;
+  }
+}
+
+.hintTouch {
+  display: none;
+}
+
+@media (hover: none) {
+  .hintHover {
+    display: none;
+  }
+
+  .hintTouch {
+    display: inline;
+  }
+}
+
+@media (max-width: 720px) {
+  .bookshelf {
+    --book-h: 220px;
+    --headroom: 44px;
+    --plank: 12px;
+  }
+
+  .shelf {
+    padding: 0;
+  }
+}

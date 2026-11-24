@@ -1,0 +1,234 @@
+/* Sizes (--book-h, --headroom, --plank) come from Bookshelf.module.css. */
+
+.slot {
+  display: flex;
+  /* Stay on top until the book has turned back into place. */
+  transition: z-index 0s 340ms;
+}
+
+/* A focused book draws over its neighbours so its ring shows, and a
+   pulled-out (hovered) one over everything. */
+.slot:focus-within {
+  z-index: 1;
+  transition-delay: 0s;
+}
+
+.slot:hover {
+  z-index: 2;
+  transition-delay: 0s;
+}
+
+/* A button, with the browser's button look reset. */
+.book {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: var(--row-h);
+  margin: 0;
+  padding: var(--headroom) 0 var(--plank);
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  outline: none;
+  cursor: pointer;
+}
+
+.book:focus-visible {
+  outline: none;
+}
+
+.stage {
+  display: block;
+  height: calc(var(--book-h) * var(--height));
+  perspective: 900px;
+  pointer-events: none;
+}
+
+/* The spine faces out and the cover runs back into the shelf off the spine's
+   right edge. Turning the body -90deg about the middle of the book swings the
+   cover round to face the viewer, centred on the spine; the translate pulls
+   it forward off the shelf. */
+.body {
+  --cover-w: calc(var(--book-h) * var(--height) * var(--ratio));
+
+  display: block;
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50% calc(var(--cover-w) / -2);
+  transition: transform 340ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Pulled out on hover only. Focus can't do it: clicking leaves focus on the
+   button, and pressing Esc to close the notes makes that focus count as
+   :focus-visible, so the cover would stay out until the next click elsewhere.
+   Keyboard focus gets a ring on the spine instead. Hover only counts where
+   there's a real pointer, since touch browsers keep a tapped element in
+   :hover. */
+@media (hover: hover) {
+  .book:hover .body {
+    transform: translate3d(0, -20px, calc(var(--cover-w) / 2 + 24px))
+      rotateY(-90deg);
+  }
+}
+
+.book:focus-visible .spine {
+  outline: 1px solid var(--fg);
+  outline-offset: 3px;
+}
+
+.spine {
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: center;
+  min-width: 44px;
+  height: 100%;
+  padding: 10px 0 8px;
+  border: 1px solid transparent;
+  backface-visibility: hidden;
+}
+
+.light {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.mid {
+  background: var(--gray-3);
+  color: var(--bg);
+}
+
+.dark {
+  background: var(--placeholder-bg);
+  color: var(--fg);
+  border-color: var(--border-strong);
+}
+
+/* Paired rules, like the bands tooled across a cloth spine. */
+.band {
+  align-self: stretch;
+  flex: none;
+  height: 7px;
+  margin: 0 6px;
+  border-top: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  opacity: 0.55;
+}
+
+.title {
+  flex: 1 1 auto;
+  padding: 14px 10px;
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.tag {
+  writing-mode: horizontal-tb;
+  padding: 8px 4px 0;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  background: var(--placeholder-bg);
+  transform-origin: left center;
+  transform: rotateY(90deg);
+  backface-visibility: hidden;
+}
+
+.book:focus-visible .cover {
+  outline: 1px solid var(--fg);
+  outline-offset: 4px;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 16px;
+  border: 1px dashed var(--placeholder-border);
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1;
+  text-align: center;
+  color: var(--gray-3);
+}
+
+/* One status line under the shelf, shared by every book. */
+.caption {
+  position: absolute;
+  top: calc(100% - var(--status-h));
+  left: 0;
+  right: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--gray-2);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.book:focus-visible .caption {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .book:hover .caption {
+    opacity: 1;
+  }
+
+  /* The hovered book takes the status line from a focused one. */
+  :global(ul):has(> .slot:hover) .slot:not(:hover) .caption {
+    opacity: 0;
+  }
+}
+
+.kind {
+  margin-right: 12px;
+  color: var(--gray-4);
+}
+
+.captionTitle {
+  color: var(--fg);
+}
+
+.creator {
+  color: var(--gray-3);
+}
+
+@media (max-width: 720px) {
+  .title {
+    padding: 12px 8px;
+    font-size: 22px;
+  }
+
+  .spine {
+    min-width: 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .body {
+    transition: none;
+  }
+}

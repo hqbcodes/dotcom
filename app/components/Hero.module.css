@@ -49,31 +49,8 @@
   color: var(--gray-1);
 }
 
-.facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 40px;
-  margin: 24px 0 0;
-  font-size: 15px;
-  color: var(--gray-3);
-}
-
-.fact {
-  display: flex;
-  gap: 0.6em;
-}
-
-.fact dd {
-  margin: 0;
-  color: var(--fg);
-}
-
 @media (max-width: 720px) {
   .aboutText {
     font-size: 18px;
-  }
-
-  .facts {
-    flex-direction: column;
   }
 }
