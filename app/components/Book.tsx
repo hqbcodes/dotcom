@@ -13,8 +13,9 @@ const spineTag: Record<ShelfKind, string> = {
 
 // Spine metrics, mirrored from Book.module.css and Bookshelf.module.css.
 // VT323 is monospaced: every glyph advances 0.4em, plus the title's 0.04em
-// letter-spacing; 0.48em leaves room for a wider fallback font.
-const CHAR_EM = 0.48
+// letter-spacing. The title doesn't wrap, so a wider fallback font would run
+// long down the spine, never across into the next book.
+const CHAR_EM = 0.44
 // Spine padding (10 + 8), border (2), two bands (14) and the tag (18).
 const SPINE_CHROME = 52
 const spineSizes = {
