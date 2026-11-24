@@ -21,6 +21,13 @@
   object-fit: cover;
 }
 
+/* Covers that aren't 2:3 sit whole at the bottom of the frame instead of
+   being cropped. */
+.contain .image {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
 .placeholder {
   display: flex;
   align-items: center;

@@ -6,7 +6,13 @@ import persona5Cover from '@/public/now/persona-5.jpg'
 export type NowKind = 'reading' | 'watching' | 'playing'
 
 export type NowCover =
-  | { kind: 'image'; src: StaticImageData; alt: string }
+  | {
+      kind: 'image'
+      src: StaticImageData
+      alt: string
+      /** `cover` (default) crops to fill the 2:3 frame; `contain` shows the whole image. */
+      fit?: 'cover' | 'contain'
+    }
   /** A blank poster with the title on it, until a cover image is added. */
   | { kind: 'placeholder'; alt: string }
 
@@ -36,6 +42,8 @@ export const now: NowItem[] = [
       kind: 'image',
       src: xpExplainedCover,
       alt: 'Extreme Programming Explained, 2nd edition, book cover',
+      // The cover is 4:5, so cropping it to 2:3 cuts off the title.
+      fit: 'contain',
     },
   },
   {

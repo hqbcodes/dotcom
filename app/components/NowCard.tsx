@@ -14,7 +14,13 @@ export default function NowCard({ item }: NowCardProps) {
       className={item.href ? `${styles.card} ${styles.linked}` : styles.card}
     >
       {cover.kind === 'image' ? (
-        <div className={styles.cover}>
+        <div
+          className={
+            cover.fit === 'contain'
+              ? `${styles.cover} ${styles.contain}`
+              : styles.cover
+          }
+        >
           <Image
             src={cover.src}
             alt={cover.alt}
