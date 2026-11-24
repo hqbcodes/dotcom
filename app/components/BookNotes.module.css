@@ -1,0 +1,197 @@
+/* The popover sits in the top layer; these rules replace the browser's
+   default popover box. Display is set only while open, so the closed panel
+   keeps the browser's display: none. */
+.panel {
+  inset: 0;
+  width: min(960px, 100% - 2 * var(--gutter-min));
+  max-height: calc(100dvh - 2 * var(--gutter-min));
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid var(--border-strong);
+  background: var(--panel-bg);
+  color: var(--fg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.panel:popover-open {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+/* The page shows through, dimmed. ::backdrop only inherits custom properties
+   in recent browsers, hence the fallback. */
+.panel::backdrop {
+  background: var(--overlay, rgba(0, 0, 0, 0.72));
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+/* No scrolling the page behind an open panel; the stable gutter stops the
+   page shifting when its scrollbar goes. */
+:global(html):has(.panel:popover-open) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.coverSide {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px;
+  border-right: 1px solid var(--border);
+}
+
+.image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 360px;
+  /* Fits under the title bar (about 50px) and the 40px padding. */
+  max-height: min(540px, 100dvh - 2 * var(--gutter-min) - 140px);
+  border: 1px solid var(--border-strong);
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  aspect-ratio: 2 / 3;
+  padding: 16px;
+  border: 1px dashed var(--placeholder-border);
+  background: var(--placeholder-bg);
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1;
+  text-align: center;
+  color: var(--gray-3);
+}
+
+.notesSide {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  padding: 40px;
+}
+
+.bar {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 24px;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.close {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--gray-3);
+  cursor: pointer;
+}
+
+.close:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.close:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 2px;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 56px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.byline {
+  margin: 0;
+  font-size: 15px;
+  color: var(--gray-3);
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--gray-1);
+}
+
+.notes p {
+  margin: 0;
+}
+
+.link {
+  align-self: flex-start;
+  margin-top: 8px;
+  font-size: 15px;
+  color: var(--gray-2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel:popover-open {
+    animation: rise 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .panel:popover-open::backdrop {
+    animation: fade 200ms ease-out;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Phones: cover on top, notes underneath, the whole panel scrolls. */
+@media (max-width: 720px) {
+  .panel:popover-open {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .coverSide {
+    padding: 24px 24px 0;
+    border-right: 0;
+  }
+
+  .image {
+    max-width: 100%;
+    max-height: 42dvh;
+  }
+
+  .placeholder {
+    width: 160px;
+    font-size: 24px;
+  }
+
+  .notesSide {
+    padding: 24px;
+  }
+
+  .bar {
+    padding: 12px 20px;
+  }
+}
