@@ -6,10 +6,15 @@
   transition: z-index 0s 340ms;
 }
 
-/* A pulled-out book draws over its neighbours. */
-.slot:hover,
+/* A focused book draws over its neighbours so its ring shows, and a
+   pulled-out (hovered) one over everything. */
 .slot:focus-within {
   z-index: 1;
+  transition-delay: 0s;
+}
+
+.slot:hover {
+  z-index: 2;
   transition-delay: 0s;
 }
 
@@ -56,10 +61,22 @@
   transition: transform 340ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.book:hover .body,
-.book:focus .body {
-  transform: translate3d(0, -20px, calc(var(--cover-w) / 2 + 24px))
-    rotateY(-90deg);
+/* Pulled out on hover only. Focus can't do it: clicking leaves focus on the
+   button, and pressing Esc to close the notes makes that focus count as
+   :focus-visible, so the cover would stay out until the next click elsewhere.
+   Keyboard focus gets a ring on the spine instead. Hover only counts where
+   there's a real pointer, since touch browsers keep a tapped element in
+   :hover. */
+@media (hover: hover) {
+  .book:hover .body {
+    transform: translate3d(0, -20px, calc(var(--cover-w) / 2 + 24px))
+      rotateY(-90deg);
+  }
+}
+
+.book:focus-visible .spine {
+  outline: 1px solid var(--fg);
+  outline-offset: 3px;
 }
 
 .spine {
@@ -171,9 +188,19 @@
   pointer-events: none;
 }
 
-.book:hover .caption,
-.book:focus .caption {
+.book:focus-visible .caption {
   opacity: 1;
+}
+
+@media (hover: hover) {
+  .book:hover .caption {
+    opacity: 1;
+  }
+
+  /* The hovered book takes the status line from a focused one. */
+  :global(ul):has(> .slot:hover) .slot:not(:hover) .caption {
+    opacity: 0;
+  }
 }
 
 .kind {

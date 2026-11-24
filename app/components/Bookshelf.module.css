@@ -43,8 +43,15 @@
   color: var(--gray-4);
 }
 
-.bookshelf:has(.shelf > li:hover, .shelf > li:focus-within) .hint {
+/* Gives way exactly when a book's caption shows (see Book.module.css). */
+.bookshelf:has(.shelf > li > :focus-visible) .hint {
   visibility: hidden;
+}
+
+@media (hover: hover) {
+  .bookshelf:has(.shelf > li > :hover) .hint {
+    visibility: hidden;
+  }
 }
 
 .hintTouch {
