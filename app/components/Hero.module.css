@@ -20,7 +20,9 @@
   gap: 0.086em;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(64px, 16vw, 232px);
+  /* Below 400px the name follows the viewport down, so it stays on one line
+     on a 360px phone; at 64px it needs about 336px. */
+  font-size: clamp(48px, 16vw, 232px);
   line-height: 0.9;
   letter-spacing: 2px;
   text-transform: uppercase;

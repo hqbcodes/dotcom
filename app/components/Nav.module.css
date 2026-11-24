@@ -37,12 +37,19 @@
     padding-block: 16px;
   }
 
+  /* Two by two on phones, so the four links don't wrap three and one. */
   .links {
-    gap: 0;
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    gap: 0 8px;
     margin-inline: -10px;
   }
 
+  /* A thumb-sized tap target. */
   .link {
-    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 10px;
   }
 }
