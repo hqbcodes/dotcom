@@ -84,7 +84,10 @@
   display: flex;
   align-items: center;
   min-width: 44px;
-  height: 100%;
+  /* A length, not 100%: Safari sizes the slot before percentage heights
+     resolve, lays the title out in one unwrapped column, and makes the slot
+     only that wide, so the wrapped spine overlapped its neighbours. */
+  height: calc(var(--book-h) * var(--height));
   padding: 10px 0 8px;
   border: 1px solid transparent;
   backface-visibility: hidden;
