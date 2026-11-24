@@ -45,7 +45,11 @@
     margin-inline: -10px;
   }
 
+  /* A thumb-sized tap target. */
   .link {
-    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 10px;
   }
 }
