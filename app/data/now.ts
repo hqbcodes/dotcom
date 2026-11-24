@@ -1,4 +1,7 @@
 import type { StaticImageData } from 'next/image'
+import xpExplainedCover from '@/public/now/xp-explained.jpg'
+import howlsMovingCastleCover from '@/public/now/howls-moving-castle.jpg'
+import persona5Cover from '@/public/now/persona-5.jpg'
 
 export type NowKind = 'reading' | 'watching' | 'playing'
 
@@ -30,7 +33,8 @@ export const now: NowItem[] = [
     creator: 'Kent Beck with Cynthia Andres',
     year: 2004,
     cover: {
-      kind: 'placeholder',
+      kind: 'image',
+      src: xpExplainedCover,
       alt: 'Extreme Programming Explained, 2nd edition, book cover',
     },
   },
@@ -39,13 +43,17 @@ export const now: NowItem[] = [
     title: "Howl's Moving Castle",
     creator: 'Hayao Miyazaki, Studio Ghibli',
     year: 2004,
-    cover: { kind: 'placeholder', alt: "Howl's Moving Castle film poster" },
+    cover: {
+      kind: 'image',
+      src: howlsMovingCastleCover,
+      alt: "Howl's Moving Castle film poster",
+    },
   },
   {
     kind: 'playing',
     title: 'Persona 5',
     creator: 'Atlus',
     year: 2016,
-    cover: { kind: 'placeholder', alt: 'Persona 5 box art' },
+    cover: { kind: 'image', src: persona5Cover, alt: 'Persona 5 box art' },
   },
 ]
