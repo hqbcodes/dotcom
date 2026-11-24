@@ -40,6 +40,7 @@ export default function OffHours() {
         cwd="~ %"
         command="ls shelf/"
         title="Outside of Work"
+        subtitle="What I've been reading, watching, and playing."
       />
       <Bookshelf />
       {/*

@@ -39,19 +39,23 @@
 }
 
 /* The spine faces out and the cover runs back into the shelf off the spine's
-   right edge. Turning the body -90deg about the spine's front-left corner
-   swings the cover round to face the viewer. */
+   right edge. Turning the body -90deg about the middle of the book swings the
+   cover round to face the viewer, centred on the spine; the translate pulls
+   it forward off the shelf. */
 .body {
+  --cover-w: calc(var(--book-h) * var(--height) * var(--ratio));
+
   position: relative;
   height: 100%;
   transform-style: preserve-3d;
-  transform-origin: left center;
+  transform-origin: 50% 50% calc(var(--cover-w) / -2);
   transition: transform 340ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .book:hover .body,
 .book:focus .body {
-  transform: translate3d(0, -20px, 48px) rotateY(-90deg);
+  transform: translate3d(0, -20px, calc(var(--cover-w) / 2 + 24px))
+    rotateY(-90deg);
 }
 
 .spine {
@@ -157,6 +161,7 @@
   margin: 0;
   font-size: 14px;
   line-height: 1.5;
+  text-align: center;
   color: var(--gray-2);
   opacity: 0;
   pointer-events: none;

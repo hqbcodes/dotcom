@@ -11,18 +11,20 @@
   position: relative;
 }
 
-/* Books wrap onto new shelves; each row of --row-h ends in a plank drawn by
-   the background. The right padding leaves room for the last book in a row to
-   turn its cover out without leaving the page. */
+/* Books stand centred and wrap onto new shelves; each row of --row-h ends in a
+   plank drawn by the background. A turned cover is centred on its spine, so
+   the side padding leaves room for the end books of a full row to turn. On
+   phones there's no room to spare: covers may swing into the gutter, and the
+   section clips anything past the screen edge (OffHours.module.css). */
 .shelf {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-content: flex-start;
   gap: 0 3px;
   margin: 0;
-  padding: 0 calc(var(--book-h) * 0.8) 0 0;
+  padding: 0 calc(var(--book-h) * 0.4);
   list-style: none;
-  overflow-x: clip;
   background: repeating-linear-gradient(
     to bottom,
     transparent 0 calc(var(--row-h) - var(--plank)),
@@ -37,6 +39,7 @@
   margin: 20px 0 0;
   font-size: 14px;
   line-height: 1.5;
+  text-align: center;
   color: var(--gray-4);
 }
 
@@ -63,5 +66,9 @@
     --book-h: 220px;
     --headroom: 44px;
     --plank: 12px;
+  }
+
+  .shelf {
+    padding: 0;
   }
 }

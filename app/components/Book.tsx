@@ -19,7 +19,11 @@ export default function Book({ item }: BookProps) {
   const tone = item.spine?.tone ?? 'dark'
   const ratio =
     cover.kind === 'image' ? `${cover.src.width} / ${cover.src.height}` : '2 / 3'
-  const stageStyle = { '--height': item.spine?.height ?? 1 } as CSSProperties
+  const stageStyle = {
+    '--height': item.spine?.height ?? 1,
+    // Cover width over height, so the CSS can find the book's middle.
+    '--ratio': cover.kind === 'image' ? cover.src.width / cover.src.height : 2 / 3,
+  } as CSSProperties
 
   const contents = (
     <>

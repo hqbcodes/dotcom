@@ -1,5 +1,8 @@
 .offHours {
   gap: 56px;
+  /* A bookshelf cover turned out near the screen edge never scrolls the page
+     sideways. Only the x axis, so covers can still lift above the shelf. */
+  overflow-x: clip;
 }
 
 .fetch {
