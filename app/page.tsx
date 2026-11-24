@@ -12,8 +12,8 @@ export default function Home() {
       <main>
         <Hero />
         <Projects />
-        <BlogList />
         <OffHours />
+        <BlogList />
       </main>
       <Footer />
     </>
