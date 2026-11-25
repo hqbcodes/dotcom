@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { IBM_Plex_Mono, VT323 } from 'next/font/google'
 import './globals.css'
 import Scanlines from './components/Scanlines'
+import { profile, siteUrl } from './data/profile'
 
 const vt323 = VT323({
   subsets: ['latin'],
@@ -24,9 +25,29 @@ const plexMono = IBM_Plex_Mono({
   fallback: ['ui-monospace', 'Menlo', 'monospace'],
 })
 
+const title = `${profile.name} — ${profile.jobTitle}`
+
 export const metadata: Metadata = {
-  title: 'Henry Burke',
-  description: 'Personal portfolio of Henry Burke — Software Engineer',
+  metadataBase: new URL(siteUrl),
+  title: { default: title, template: `%s — ${profile.name}` },
+  description: profile.description,
+  authors: [{ name: profile.name, url: siteUrl }],
+  creator: profile.name,
+  alternates: { canonical: '/' },
+  // og:image comes from app/opengraph-image.tsx.
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: profile.name,
+    title,
+    description: profile.description,
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description: profile.description,
+  },
 }
 
 export default function RootLayout({
