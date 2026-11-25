@@ -34,6 +34,7 @@ npm lint
 - `app/globals.css` - Colour tokens, gutters, and base element styles
 - `app/components/` - One component per section (`Nav`, `Hero`, `Projects` + `ProjectCard`, `BlogList`, `OffHours` + `Bookshelf` + `Book` + `BookNotes`, `Footer`) plus small shared pieces (`Section`, `SectionHeader`, `Prompt`, `Cursor`, `Scanlines`), each with its own CSS module
 - `app/data/` - All editable content as typed arrays (`profile.ts`, `projects.ts`, `posts.ts`, `offHours.ts`, `shelf.ts`)
+- SEO: `layout.tsx` metadata (canonical, Open Graph, Twitter card), `opengraph-image.tsx` (terminal-style link preview, built at build time with VT323/Plex fetched from Google Fonts), `robots.ts`, `sitemap.ts` (add new routes here), and Person JSON-LD in `page.tsx`. All read `siteUrl` and `description` from `profile.ts`; `siteUrl` is `NEXT_PUBLIC_SITE_URL`, else Vercel's production domain.
 
 ### Key Patterns
 
